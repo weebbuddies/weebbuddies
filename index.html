@@ -1,8 +1,5 @@
+
 <!doctype html>
-
-
-
-
 
 <style>
     body {
@@ -12,6 +9,7 @@
         background-color: black;
         color: white;
         overflow: auto;
+        
     }
 
     h1 {
@@ -33,6 +31,8 @@
         box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         text-align: center;
         position: relative;
+        width: 340px;
+        align-items: center;
         z-index: 1;
     }
 
@@ -195,15 +195,23 @@
         font-weight: bold;
         color: white;
     }
+
+    .main-div{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 </style>
 
 
 
 <canvas id="snowCanvas"></canvas>
-
-<div>
-    <h1>WEEB BUDDIES</h1> <!-- Main header -->
-    <h2>Alliance Request!</h2> <!-- Subheader added here -->
+<h1>WEEB BUDDIES</h1> <!-- Main header -->
+<h2>Alliance Request!</h2> <!-- Subheader added here -->
+<div class="main-div">
+   
+    <div class="form_div">
+ 
     <form id="contactForm">
         <label for="name" class="required">Name:</label>
         <input type="text" id="name" name="name" placeholder="" required />
@@ -236,6 +244,8 @@
 
         <button type="button" id="submitButton" onclick="submitForm()">Form the Alliance!</button>
     </form>
+         
+  </div>
 </div>
 
 <!-- Images Section -->
