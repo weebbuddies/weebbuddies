@@ -8,8 +8,7 @@
         margin: 50px;
         background-color: black;
         color: white;
-        overflow: auto;
-        
+       padding-bottom: 0px;
     }
 
     h1 {
@@ -201,11 +200,16 @@
       align-items: center;
       justify-content: center;
     }
+
+    .body_div{
+      margin-top: 125px;
+    }
 </style>
 
 
+<div class="body_div">
 
-<canvas id="snowCanvas"></canvas>
+
 <h1>WEEB BUDDIES</h1> <!-- Main header -->
 <h2>Alliance Request!</h2> <!-- Subheader added here -->
 <div class="main-div">
@@ -276,7 +280,7 @@
     </div>
     <button onclick="closeCustomAlert()">Close</button>
 </div>
-
+</div>
 <script>
     const canvas = document.getElementById('snowCanvas');
     const ctx = canvas.getContext('2d');
