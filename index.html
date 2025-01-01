@@ -8,9 +8,10 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            margin: 20px;
+            margin: 10px;
             background-color: black;
             color: white;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
         }
 
         h1 {
@@ -27,16 +28,29 @@
         }
 
         #contactForm {
-            background-color: black;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            text-align: center;
-            position: relative;
-            width: 90%;
-            max-width: 400px;
-            margin: auto;
-        }
+    background-color: black;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    text-align: center;
+    position: relative;
+    width: 80%;
+    max-width: 350px;
+    margin: auto;
+    height: 400px;
+    margin-bottom: 20px; /* Add spacing below the form */
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 40px; /* Increase spacing above the images */
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
 
         label {
             display: block;
@@ -48,8 +62,8 @@
         select,
         textarea {
             width: calc(100% - 20px);
-            padding: 10px;
-            margin-bottom: 15px;
+            padding: 8px;
+            margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
             background-color: white;
@@ -61,28 +75,21 @@
             color: black;
             border: none;
             border-radius: 5px;
-            padding: 10px 15px;
+            padding: 8px 12px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
         }
 
         button:hover {
             background-color: #21a1f1;
         }
 
-        .image-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            margin-top: 30px;
-            flex-wrap: nowrap; /* Ensure images stay in one row */
-            overflow-x: auto; /* Enable horizontal scrolling on small screens */
-        }
+      
 
         img {
             max-width: 100%;
             height: auto;
+            margin-top: 16px;
             border-radius: 8px;
             flex-shrink: 0; /* Prevent images from shrinking */
         }
@@ -112,12 +119,13 @@
             }
 
             #contactForm {
-                padding: 15px;
+                padding: 10px;
+                height: 380px; /* Adjusted height for mobile */
             }
 
             button {
-                font-size: 14px;
-                padding: 8px 12px;
+                font-size: 12px;
+                padding: 6px 10px;
             }
         }
 
@@ -130,9 +138,18 @@
                 font-size: 1em;
             }
 
+            #contactForm {
+                width: 90%;
+                height: 350px; /* Further reduced height for small screens */
+            }
+
             button {
                 font-size: 12px;
-                padding: 6px 10px;
+                padding: 4px 6px;
+            }
+            textarea{
+              height: 40px;
+             
             }
         }
     </style>
@@ -168,7 +185,7 @@
                 </select>
 
                 <label for="comment">Comment:</label>
-                <textarea id="comment" name="comment" rows="4" placeholder="Leave your idea's or Suggestion"></textarea>
+                <textarea id="comment" name="comment" rows="3" placeholder="Leave your ideas or suggestions"></textarea>
 
                 <button type="button" id="submitButton" onclick="submitForm()">Form the Alliance!</button>
             </form>
@@ -186,6 +203,7 @@
             <img src="https://i.ibb.co/L1gC3HV/ichigo.png" alt="Ichigo" />
         </a>
     </div>
+
 
 <script>
     const canvas = document.getElementById('snowCanvas');
@@ -286,4 +304,3 @@
         document.getElementById('customAlert').style.display = 'none';
     }
 </script>
-
