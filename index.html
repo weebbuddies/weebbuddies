@@ -1,0 +1,369 @@
+<!doctype html>
+
+
+
+
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 50px;
+        background-color: black;
+        color: white;
+        overflow: auto;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+
+    /* Styling for the form */
+    #contactForm {
+        background-color: black;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        text-align: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: white;
+    }
+
+    /* White asterisk for required fields */
+    .required::after {
+        content: ' *';
+        color: white; /* White asterisk */
+    }
+
+    input,
+    select,
+    textarea {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: white;
+        color: black;
+    }
+
+    input::placeholder {
+        color: black;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+        background-color: #f0f0f0;
+    }
+
+    button {
+        background-color: #61dafb;
+        color: black;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #21a1f1;
+    }
+
+    .image-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 30px;
+    }
+
+    img {
+        max-width: 90%;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    /* Styling for the snow effect */
+    canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    /* Style for the size chart button (Moved to the left above the size dropdown) */
+    #sizeChartButton {
+        background-color: #ffcc00;
+        color: black;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px;
+        margin-bottom: 15px; /* Space between button and dropdown */
+        display: inline-block;
+        text-align: left; /* Align the button left */
+    }
+
+    #sizeChartButton:hover {
+        background-color: #e6b800;
+    }
+
+    /* Modal for the size chart */
+    #sizeChartModal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+    }
+
+    #sizeChartModal img {
+        max-width: 80%;
+        max-height: 80%;
+        border-radius: 10px;
+    }
+
+    #closeSizeChart {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background-color: red;
+        color: white;
+        border: none;
+        font-size: 20px;
+        border-radius: 50%;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    #closeSizeChart:hover {
+        background-color: #cc0000;
+    }
+
+    /* Custom red alert box */
+    #customAlert {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #cc0000; /* Darker red */
+        color: black; /* Black text color */
+        padding: 20px;
+        border-radius: 10px;
+        font-size: 20px;
+        font-weight: bold; /* Bold text */
+        text-align: center;
+        z-index: 9999;
+    }
+
+    #customAlert button {
+        background-color: white;
+        color: red;
+        border: none;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Custom bold error message */
+    #customAlertMessage {
+        font-weight: bold;
+        color: white;
+    }
+</style>
+
+
+
+<canvas id="snowCanvas"></canvas>
+
+<div>
+    <h1>WEEB BUDDIES</h1> <!-- Main header -->
+    <h2>Alliance Request!</h2> <!-- Subheader added here -->
+    <form id="contactForm">
+        <label for="name" class="required">Name:</label>
+        <input type="text" id="name" name="name" placeholder="" required />
+
+        <label for="email" class="required">Email ID:</label>
+        <input type="email" id="email" name="email" placeholder="" required />
+
+        <label for="phone" class="required">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" pattern="\d{10,}" title="Phone number must be at least 10 digits" placeholder="" required />
+
+        <!-- Size Chart Button -->
+        <button type="button" id="sizeChartButton" onclick="openSizeChart()">Size Chart</button>
+
+        <!-- Size dropdown -->
+        <label for="size" class="required">Size:</label>
+        <select id="size" name="size" required>
+            <option value="" />Choose your size
+            <option value="S" />S
+            <option value="M" />M
+            <option value="L" />L
+            <option value="XL" />XL
+            <option value="2XL" />2XL
+            <option value="3XL" />3XL
+            <option value="4XL" />4XL
+        </select>
+
+        <!-- Comment Section -->
+        <label for="comment">Comment:</label>
+        <textarea id="comment" name="comment" rows="4" placeholder="Leave your idea's or Suggestion"></textarea>
+
+        <button type="button" id="submitButton" onclick="submitForm()">Form the Alliance!</button>
+    </form>
+</div>
+
+<!-- Images Section -->
+<div class="image-container">
+    <a href="https://ibb.co/QDWWG67">
+        <img src="https://i.ibb.co/WVrr1cN/naruto.png" alt="Naruto" border="0" />
+    </a>
+
+    <a href="https://ibb.co/FxzV5wS">
+        <img src="https://i.ibb.co/ngjC7cH/luffy.png" alt="Luffy" border="0" />
+    </a>
+
+    <a href="https://ibb.co/Xt5zqMc">
+        <img src="https://i.ibb.co/L1gC3HV/ichigo.png" alt="Ichigo" border="0" />
+    </a>
+</div>
+
+<!-- Size Chart Modal -->
+<div id="sizeChartModal">
+    <button id="closeSizeChart" onclick="closeSizeChart()">X</button>
+    <a href="https://ibb.co/S3Z8qgJ"><img src="https://i.ibb.co/wz2XDqY/size-chart.jpg" alt="size-chart" border="0" /></a><br /><a target='_blank' href='https://imgbb.com/'></a><br />
+</div>
+
+<!-- Custom Red Alert -->
+<div id="customAlert">
+    <div id="customAlertMessage">
+        Please fill the required fields
+    </div>
+    <button onclick="closeCustomAlert()">Close</button>
+</div>
+
+<script>
+    const canvas = document.getElementById('snowCanvas');
+    const ctx = canvas.getContext('2d');
+    const snowflakes = [];
+    const numberOfSnowflakes = window.innerWidth < 768 ? 20 : 50; // Fewer snowflakes on mobile
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    function createSnowflake() {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const radius = Math.random() * 2 + 1; // Smaller radius for snowflakes
+        const speed = Math.random() * 0.5 + 0.2; // Slower speed
+        snowflakes.push({ x, y, radius, speed });
+    }
+
+    function updateSnowflakes() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.7)'; // Slightly transparent snowflakes
+
+        for (let flake of snowflakes) {
+            ctx.beginPath();
+            ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
+            ctx.fill();
+            flake.y += flake.speed;
+
+            if (flake.y > canvas.height) {
+                flake.y = -flake.radius;
+                flake.x = Math.random() * canvas.width;
+            }
+        }
+
+        requestAnimationFrame(updateSnowflakes);
+    }
+
+    for (let i = 0; i < numberOfSnowflakes; i++) {
+        createSnowflake();
+    }
+    updateSnowflakes();
+
+    function openSizeChart() {
+        document.getElementById('sizeChartModal').style.display = 'flex';
+    }
+
+    function closeSizeChart() {
+        document.getElementById('sizeChartModal').style.display = 'none';
+    }
+
+    function submitForm() {
+        var form = document.getElementById('contactForm');
+        var submitButton = document.getElementById('submitButton'); // Select the submit button
+
+        if (!form.checkValidity()) {
+            showCustomAlert("Please fill the required fields or Check your mobile number");
+            return;
+        }
+
+        var phone = document.getElementById('phone').value;
+
+        // Check if the phone number has 10 or more digits
+        if (phone.length < 10) {
+            showCustomAlert('Phone number must be at least 10 digits.');
+            return;
+        }
+
+        // Disable the submit button and change text to "Submitting..."
+        submitButton.disabled = true;
+        submitButton.textContent = "Submitting...";
+
+        var formData = new FormData(form);
+
+        fetch('https://script.google.com/macros/s/AKfycbySO7M4ak15zkkEtMZ6ugQp70z5_HxrifaEsrCqeHnC-a1FVbB4fSuvjJ-FyBLDnqZ1Zw/exec', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.text())
+            .then(result => {
+                showCustomAlert("Form submitted successfully!");
+                form.reset();
+                submitButton.disabled = false; // Enable the button
+                submitButton.textContent = "Form the Alliance!"; // Reset the button text
+            })
+            .catch(error => {
+                showCustomAlert('Error: ' + error);
+                submitButton.disabled = false; // Enable the button
+                submitButton.textContent = "Form the Alliance!"; // Reset the button text
+            });
+    }
+
+    function showCustomAlert(message) {
+        document.getElementById('customAlertMessage').textContent = message;
+        document.getElementById('customAlert').style.display = 'block';
+    }
+
+    function closeCustomAlert() {
+        document.getElementById('customAlert').style.display = 'none';
+    }
+</script>
+
